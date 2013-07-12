@@ -463,7 +463,7 @@ RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:@"Gist
  @"created_at":     @"createdAt"}];
     
 RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
-RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:entityMapping pathPattern:@"/gists/public" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:entityMapping pathPattern:@"/gists/:gistID" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
 NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://api.github.com/gists/public"]];
 RKManagedObjectRequestOperation *managedObjectRequestOperation = [[RKManagedObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
 managedObjectRequestOperation.managedObjectContext = self.managedObjectContext;
@@ -521,7 +521,7 @@ This illustrates an important point about `RKObjectMapping` (and through inherit
 After creating the entity mapping for the `Gist` entity, the next block of code establishes a binding between an HTTP response and the mapping:
 
 ```objc
-RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:entityMapping pathPattern:@"/gists/public" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:entityMapping pathPattern:@"/gists/:gistID" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
 ```
 
 Here we are introduced to the [`RKResponseDescriptor`](http://restkit.org/api/latest/Classes/RKResponseDescriptor.html) class, which is responsible for linking the object mapping system with HTTP responses. It is important to keep in mind that the object mapping engine is completely independent of dependencies on HTTP -- it's a generalized system for describing and executing the transformation of objects across representations. HTTP just happens to be a very common transport mechanism for object representations.
