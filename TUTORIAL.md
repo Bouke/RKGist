@@ -610,7 +610,7 @@ RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:@"Gist
  @"public":         @"public",
  @"created_at":     @"createdAt"}];
     
-RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:entityMapping pathPattern:@"/gists/public" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:entityMapping pathPattern:@"/gists/:gistID" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     
 [objectManager addResponseDescriptor:responseDescriptor];
 ```
